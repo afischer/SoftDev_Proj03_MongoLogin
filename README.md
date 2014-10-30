@@ -1,6 +1,18 @@
 Mongo Login
 ===
-Write stufff here later!
+app.py varibles:
+  loggedIn bool
+  lastPage str
+  
+
+Database contains:
+   userData
+     |-userName
+     |-password
+     |-firstName
+     |-lastName
+     |-email
+     
 
 -----
 
