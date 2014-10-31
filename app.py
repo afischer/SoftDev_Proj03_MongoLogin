@@ -10,9 +10,11 @@ def addUser(uName, pword, fName, lName, em):
     db.userData.insert({userName: uName, password: pword, firstName: fName, lastName: lName, email: em})
     print "Added User " + fName + " " + lName
 
-@app.route("/", methods=['POST', 'GET'])
-def login():
-    render_template("login.html")
+addUser("Jane", "Doe", "Jane", "Doe", "jdoe@schools.nyc.gov")
+
+#@app.route("/", methods=['POST', 'GET'])
+#def login():
+#    render_template("login.html")
 
 
 if __name__=="__main__":
