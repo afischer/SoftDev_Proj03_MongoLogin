@@ -1,0 +1,23 @@
+<!-- Sourced from http://codepen.io/frytyler/pen/EGdtg -->
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../static/css/stylesheet.css" >
+</head>
+
+<body>
+<div class="login">
+	<h1>Sign Up</h1>
+    <form method="post" action="{{nextPage}}">
+    	<input type="text" name="email" placeholder="e-Mail" required="required" />
+		<input type="text" name="firstName" placeholder="First" required="required" />
+		<input type="text" name="lastName" placeholder="Last" required="required" />
+		<input type="text" name="username" placeholder="Username" required="required" />
+        <input type="password" name="password" placeholder="Password" required="required" />
+		<input type="password" name="confpassword" placeholder="Confirm Password" required="required" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Sign me up.</button>
+    </form>
+</div>
+</body>
+
+</html>
