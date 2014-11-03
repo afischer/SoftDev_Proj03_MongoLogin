@@ -33,7 +33,16 @@ def login2():
 
 @app.route("/signup", methods=['POST', 'GET'])
 def signup():
-    return render_template("signup.html", nextPage="/")
+    if request.method=="GET":
+        return render_template("signup.html", nextPage="/")
+    else:
+        em = request.form["email"]
+        fName = request.form["fName"]
+        lName = request.form["lName"]
+        uName = request.form["uName"]
+        pword = request.form["pword"]
+        confPword = request.form["confPword"]
+        addUser(uName, pword, fName, lName, em)
 
 
 @app.route("/about")
