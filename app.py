@@ -6,9 +6,19 @@ app = Flask(__name__)
 #conn = Connection()
 #db = conn.userDatabase
 
+def verify(uName, pword):
+    if(db.userData.find({userName: uName}) == None):
+        return True;
+    else:
+        return False;
+    
+
 def addUser(uName, pword, fName, lName, em):
-    db.userData.insert({userName: uName, password: pword, firstName: fName, lastName: lName, email: em})
-    print "Added User " + fName + " " + lName
+    if (verify(uName, pword)):
+        db.userData.insert({userName: uName, password: pword, firstName: fName, lastName: lName, email: em})
+        print "Added User " + fName + " " + lName
+    else:
+        print "This username is already taken."
 
 
 #addUser("Jane", "Doe", "Jane", "Doe", "jdoe@schools.nyc.gov")
