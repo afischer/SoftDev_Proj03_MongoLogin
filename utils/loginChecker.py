@@ -9,5 +9,4 @@ def checkLogin(uName, pword):
     else:
         return False;
 
-checkLogin("Jane", "Doe")
     
