@@ -26,8 +26,8 @@ def login():
             print uName
             print pword
             return render_template("profile.html",
-                                   first = fName,
-                                   last = lName
+                                   first = uName,
+                                   last = uName
                                    )
         else:
             return render_template("login.html", tryagain=True)
@@ -60,8 +60,7 @@ def profile():
     if not 'username' in session:
         return redirect(url_for('login'))
     else:
-        return render_template("profile.html",
-                               first = fName
+        return render_template("profile.html"
                                )
 
 @app.route("/secret")
