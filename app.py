@@ -55,7 +55,7 @@ def signup():
         if (addUser(uName, pword, fName, lName, em)):
             return render_template("login.html")
         else:
-            return "boo"
+            return render_template("signup.html")
 
 
 
