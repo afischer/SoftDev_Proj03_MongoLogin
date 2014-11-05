@@ -9,7 +9,7 @@ conn = pymongo.MongoClient()
 db = conn.userDatabase
 
 
-dbManager.addUser("Jane", "Doe", "Jane", "Doe", "jdoe@schools.nyc.gov")
+dbManager.addUser("jdoe","Jane", "Doe", "Jane", "Doe", "jdoe@schools.nyc.gov")
 
 @app.route("/login", methods=['POST', 'GET'])
 @app.route("/", methods=['POST', 'GET'])

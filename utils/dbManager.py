@@ -10,16 +10,16 @@ def addUser(uName, pword, confPword, fName, lName, em):
         db.userData.insert({'userName': uName, 'password': pword, 'firstName': fName, 'lastName': lName, 'email': em})
         print "Added User " + fName + " " + lName
         return True
-    else if (compPword(pword, confPword)):
+    elif (compPword(pword, confPword)):
         print "This username is already taken."
         return False
-    else if (verify(uName, pword)):
+    elif (verify(uName, pword)):
         print "The passwords do not match."
         return False
     else:
         print "The username is already taken and the paswords do not match."
         return False
-        
+
 def compPword(pword, confPword):
     if (pword == confPword):
         return True
