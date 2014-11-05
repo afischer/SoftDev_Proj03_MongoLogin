@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from utils import loginChecker.py 
+from utils import loginChecker
 #from pymongo import Connection
 
 app = Flask(__name__)
@@ -12,7 +12,7 @@ def verify(uName, pword):
         return True;
     else:
         return False;
-    
+
 
 def addUser(uName, pword, fName, lName, em):
     if (verify(uName, pword)):
@@ -56,7 +56,7 @@ def signup():
             return render_template("login.html")
         else:
             return "boo"
-        
+
 
 
 @app.route("/about")
