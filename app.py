@@ -37,13 +37,11 @@ def signup():
         uName = request.form["uName"]
         pword = request.form["pword"]
         confPword = request.form["confPword"]
-        dbManageraddUser(fName, lName, uName, pword, em)
-        print "ADDED" + fName + " " + lName
-
-        # if (dbManager.addUser(uName, pword, fName, lName, em)):
-        #     return render_template("login.html")
-        # else:
-        #     return render_template("signup.html")
+        if (dbManager.addUser(uName, pword, fName, lName, em)):
+            print "ADDED" + fName + " " + lName
+            return render_template("login.html")
+        else:
+            return render_template("signup.html")
 
 
 
