@@ -1,30 +1,15 @@
 from flask import Flask, render_template, request
-from utils import loginChecker
-#from pymongo import Connection
+from utils import loginChecker, dbManager
+import pymongo
 
 app = Flask(__name__)
 
-#conn = Connection()
-#db = conn.userDatabase
 
-def verify(uName, pword):
-    if(db.userData.find({userName: uName}) == None):
-        return True;
-    else:
-        return False;
+conn = pymongo.MongoClient()
+db = conn.userDatabase
 
 
-def addUser(uName, pword, fName, lName, em):
-    if (verify(uName, pword)):
-        db.userData.insert({userName: uName, password: pword, firstName: fName, lastName: lName, email: em})
-        print "Added User " + fName + " " + lName
-        return True
-    else:
-        print "This username is already taken."
-        return False
-
-
-#addUser("Jane", "Doe", "Jane", "Doe", "jdoe@schools.nyc.gov")
+dbManager.addUser("Jane", "Doe", "Jane", "Doe", "jdoe@schools.nyc.gov")
 
 @app.route("/login", methods=['POST', 'GET'])
 @app.route("/", methods=['POST', 'GET'])
@@ -34,10 +19,10 @@ def login():
     else:
         uName = request.form["uName"]
         pword = request.form["pword"]
-        if (checkLogin(uName, pword)):
+        if (loginChecker.checkLogin(uName, pword)):
             print uName
             print pword
-            return "hi"
+            return "yay"
         else:
             return "boo"
 
@@ -52,10 +37,13 @@ def signup():
         uName = request.form["uName"]
         pword = request.form["pword"]
         confPword = request.form["confPword"]
-        if (addUser(uName, pword, fName, lName, em)):
-            return render_template("login.html")
-        else:
-            return render_template("signup.html")
+        dbManageraddUser(fName, lName, uName, pword, em)
+        print "ADDED" + fName + " " + lName
+
+        # if (dbManager.addUser(uName, pword, fName, lName, em)):
+        #     return render_template("login.html")
+        # else:
+        #     return render_template("signup.html")
 
 
 
