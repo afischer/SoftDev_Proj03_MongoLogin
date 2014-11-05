@@ -27,7 +27,7 @@ def compPword(pword, confPword):
         return False
 
 def verify(uName, pword):
-    if(db.userData.find({'userName': uName}) == None):
+    if(db.userData.find({'userName': uName}).count() == 0):
         return True;
     else:
         return False;
