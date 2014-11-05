@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 from utils import loginChecker, dbManager
 import pymongo
 
@@ -9,8 +9,6 @@ app.secret_key ='secretKeyThatShouldntBeOnGithub'
 conn = pymongo.MongoClient()
 db = conn.userDatabase
 
-
-dbManager.addUser("jdoe","Jane", "Doe", "Jane", "Doe", "jdoe@schools.nyc.gov")
 
 @app.route("/login", methods=['POST', 'GET'])
 @app.route("/", methods=['POST', 'GET'])
@@ -27,9 +25,12 @@ def login():
         if (loginChecker.checkLogin(uName, pword)):
             print uName
             print pword
-            return "yay"
+            return render_template("profile.html",
+                                   first = fName,
+                                   last = lName
+                                   )
         else:
-            return "boo"
+            return render_template("login.html", tryagain=True)
 
 @app.route("/signup", methods=['POST', 'GET'])
 def signup():
@@ -59,7 +60,9 @@ def profile():
     if not 'username' in session:
         return redirect(url_for('login'))
     else:
-        return render_template("profile.html")
+        return render_template("profile.html",
+                               first = fName
+                               )
 
 @app.route("/secret")
 def secret():
