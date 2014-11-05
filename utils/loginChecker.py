@@ -6,7 +6,7 @@ db = conn.userDatabase
 
 
 def checkLogin(uName, pword):
-    if(db.userData.find({'userName': uName, 'password': pword}).count() > 0):
+    if(db.userData.count({'userName': uName, 'password': pword}) > 0):
          return True;
     else:
          return False;
