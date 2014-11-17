@@ -1,16 +1,26 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from utils import loginChecker, dbManager
 from pymongo import Connection
+from functools import wraps
 import pymongo
 
 app = Flask(__name__)
 app.secret_key ='secretKeyThatShouldntBeOnGithub'
 
-#
-# conn = pymongo.MongoClient()
-# db = conn.userDatabase
+
 conn = Connection()
 db = conn["userDatabase"]
+
+
+def authenticate(page):
+    @wraps(page)
+    def inner(*args, **kwargs):
+        if 'username' not in session:
+            session['error'] = "You cannot access this page if you are not logged in! Silly goose."
+            return redirect(url_for("login"))
+        return page(*args, **kwargs)
+    return inner
+
 
 
 @app.route("/login", methods=['POST', 'GET'])
@@ -66,6 +76,7 @@ def about():
     return render_template("about.html")
 
 @app.route("/profile")
+@authenticate
 def profile():
     if not 'username' in session:
         return redirect(url_for('login'))
@@ -74,6 +85,7 @@ def profile():
                                )
 
 @app.route("/secret")
+@authenticate
 def secret():
     if not 'username' in session:
         return redirect(url_for('login'))
